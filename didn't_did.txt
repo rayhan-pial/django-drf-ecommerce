@@ -1,0 +1,4 @@
+                        video 7
+pip install pytest
+pip install pytest-django
+
