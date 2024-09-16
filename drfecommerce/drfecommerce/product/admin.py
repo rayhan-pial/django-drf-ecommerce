@@ -25,11 +25,28 @@ class ProductLineInline(EditLinkInLine, admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductLineInline]
 
+
+class AttributeValueInLine(admin.TabularInline):
+    model = AttributeValue.product_line_attribute_value.through
+
+
+
 class ProductLineAdmin(admin.ModelAdmin):
-    inlines = [ProductImageInLine]
+    inlines = [ProductImageInLine,AttributeValueInLine]
+
+
+class AttributeInLine(admin.TabularInline):
+    model = Attribute.product_type_attribute.through
+
+
+class ProductTypeAdmin(admin.ModelAdmin):
+    inlines = [AttributeInLine]
+
 
 admin.site.register(ProductLine, ProductLineAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category)
 admin.site.register(Brand)
-# admin.site.register(ProductLine)
+admin.site.register(Attribute)
+admin.site.register(ProductType, ProductTypeAdmin)
+admin.site.register(AttributeValue)
