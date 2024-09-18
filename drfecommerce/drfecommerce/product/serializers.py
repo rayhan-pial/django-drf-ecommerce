@@ -9,10 +9,10 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ["name"]
 
 
-class BrandSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Brand
-        fields = ["name"]
+# class BrandSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Brand
+#         fields = ["name"]
 
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -57,7 +57,7 @@ class ProductLineSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    brand_name = serializers.CharField(source="brand.name")
+    # brand_name = serializers.CharField(source="brand.name")
     category_name = serializers.CharField(source="category.name")
     product_line = ProductLineSerializer(many=True)
     attribute = serializers.SerializerMethodField()
@@ -69,7 +69,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "slug",
             "description",
             "is_digital",
-            "brand_name",
+            # "brand_name",
             "category_name",
             "product_line",
             "attribute",
@@ -86,5 +86,5 @@ class ProductSerializer(serializers.ModelSerializer):
         for key in av_data:
             av_values.update({key["id"]: key["name"]})
         data.update({"type specification": av_values})
-        
+
         return data
